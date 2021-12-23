@@ -32,8 +32,15 @@ trytond_dependencies = [
     'company',
 ]
 
+extras_require = {
+    'dev': [],
+}
+
+tests_require = extras_require['dev']
+
+
 for dep in trytond_dependencies:
-    tests_require.append(
+    extras_require['dev'].append(
         '{prefix}_{dep} >= {major}.{minor}, < {major}.{minor_plus}'.format(
             prefix='trytond',
             dep=dep,
@@ -69,4 +76,5 @@ setup(
     license='GPL-3',
     python_requires='>=3.5',
     tests_require=tests_require,
+    extras_require=extras_require,
 )

@@ -3,8 +3,6 @@
 import factory
 import factory_trytond
 
-from . import Sequence
-
 
 class PartyConfig(factory_trytond.TrytonFactory):
     class Meta:
@@ -12,7 +10,7 @@ class PartyConfig(factory_trytond.TrytonFactory):
 
     party_lang = factory_trytond.ModelData('ir', 'lang_ca')
     party_sequence = factory.SubFactory(
-        Sequence,
+        'factories.sequence.Sequence',
         name='Party',
         sequence_type=factory_trytond.ModelData(
             'party', 'sequence_type_party'),
@@ -169,7 +167,7 @@ class AccountInvoicePaymentTerm(factory_trytond.TrytonFactory):
 
 class ComParty(Party):
     name = factory.Faker('company')
-    customer_payment_term = factory.SubFactory(AccountInvoicePaymentTerm)
-    accounts = factory.RelatedFactoryList(
-        PartyAccount, size=1, factory_related_name='party',
-    )
+    # customer_payment_term = factory.SubFactory(AccountInvoicePaymentTerm)
+    # accounts = factory.RelatedFactoryList(
+        # PartyAccount, size=1, factory_related_name='party',
+    # )

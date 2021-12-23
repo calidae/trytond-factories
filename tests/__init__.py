@@ -3,8 +3,6 @@ import time
 
 from trytond import backend
 
-# import pdb; pdb.set_trace()
-
 try:
     backend_name = backend.name()
 except TypeError:
