@@ -30,6 +30,7 @@ requires = ['factory_trytond']
 tests_require = []
 trytond_dependencies = [
     'company',
+    'account_invoice',
 ]
 
 extras_require = {
@@ -60,7 +61,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/calidae/trytond-factories",
     packages=find_packages(),
-    install_requires=["factory_boy", "factory_trytond"],
+    install_requires=["factory_trytond"],
     classifiers=[
         "Framework :: Tryton",
         "Intended Audience :: Developers",

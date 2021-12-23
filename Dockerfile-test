@@ -1,0 +1,21 @@
+FROM python:3.9
+
+ARG UID=1000
+ARG GID=1000
+ARG APPDIR=/app
+
+RUN true \
+    && groupadd app \
+        --gid 1000 \
+    && useradd app \
+        --gid 1000 \
+        --uid 1000 \
+        --create-home \
+        --home-dir $APPDIR
+
+RUN pip install --upgrade pip tox
+
+USER app
+WORKDIR $APPDIR
+EXPOSE 8000
+CMD pipenv run trytondev

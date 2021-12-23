@@ -60,9 +60,6 @@ class Sale(factory_trytond.TrytonFactory):
     invoice_address = factory.LazyAttribute(
         lambda n: n.party.address_get('invoice')
     )
-    shipment_address = factory.LazyAttribute(
-        lambda n: n.party.address_get('delivery')
-    )
 
     @factory.post_generation
     def lines(obj, create, extracted, **kwargs):
