@@ -107,6 +107,7 @@ class Party(factory_trytond.TrytonFactory):
         size=1,
         factory_related_name='party',
         invoice=True,
+        delivery=True,
     )
 
     # Note that while the party.party pool model has
@@ -166,7 +167,7 @@ class AccountInvoicePaymentTerm(factory_trytond.TrytonFactory):
 
 class ComParty(Party):
     name = factory.Faker('company')
-    customer_payment_term = factory.SubFactory(AccountInvoicePaymentTerm)
-    accounts = factory.RelatedFactoryList(
-        PartyAccount, size=1, factory_related_name='party',
-    )
+    # customer_payment_term = factory.SubFactory(AccountInvoicePaymentTerm)
+    # accounts = factory.RelatedFactoryList(
+        # PartyAccount, size=1, factory_related_name='party',
+    # )
