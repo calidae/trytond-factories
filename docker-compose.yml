@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  test:
+    hostname: test
+    build:
+      context: .
+      dockerfile: Dockerfile-test
+    depends_on:
+      - db
+    volumes:
+      - ./:/app
+    environment:
+      - TRYTOND_DATABASE_URI=postgresql://docker:docker@db/
+      - DB_CACHE=db_cache
+    ports:
+      - 8000:8000
+
+  db:
+    image: postgres:13
+    ports:
+      - 54321:5432
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=docker

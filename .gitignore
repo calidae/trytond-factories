@@ -1,0 +1,10 @@
+.tox
+*.egg-info/
+*.pyc
+__pycache__
+dist
+.cache/
+.local/
+build/
+db_cache/
+.bash_history
