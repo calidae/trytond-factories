@@ -1,10 +1,14 @@
-# -*- coding: utf-8 -*-
+
+__all__ = [
+    'UserWarning_',
+    'User',
+    'UserRole',
+
+]
 
 import factory
 import factory_trytond
 
-from . import Company
-from . import Employee
 from . import context_user
 
 
@@ -25,11 +29,11 @@ class User(factory_trytond.TrytonFactory):
     login = factory.Faker('user_name')
     email = factory.Faker('ascii_company_email')
     password = factory.Faker('password', length=10)
-    company = factory.SubFactory(Company)
+    company = factory.SubFactory('trytond_factories.company.Company')
     companies = factory.LazyAttribute(lambda o: [o.company])
     employees = factory.LazyAttribute(lambda o: [o.employee])
     employee = factory.SubFactory(
-        Employee,
+        'trytond_factories.company.Employee',
         company=factory.LazyAttribute(lambda o: o.factory_parent.company),
     )
     warehouse = factory_trytond.ModelData('stock', 'location_warehouse')

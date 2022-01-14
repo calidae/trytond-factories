@@ -1,4 +1,9 @@
 
+__all__ = [
+    'Company',
+    'Employee',
+]
+
 import factory
 import factory_trytond
 

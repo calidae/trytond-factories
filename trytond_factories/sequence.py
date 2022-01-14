@@ -1,4 +1,9 @@
 
+__all__ = [
+    'Sequence',
+    'StrictSequence',
+]
+
 import factory
 import factory_trytond
 

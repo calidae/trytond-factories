@@ -1,3 +1,13 @@
+
+__all__ = [
+    'AccountChartTemplates',
+    'AccountConfig',
+    'FiscalYearSequence',
+    'FiscalYear',
+    'PercentTax',
+    'FixedTax',
+]
+
 import datetime
 import functools
 
@@ -5,8 +15,6 @@ import factory
 import factory_trytond
 
 from . import context_company
-from . import Sequence
-from . import StrictSequence
 
 
 class AccountChartTemplates():
@@ -68,31 +76,31 @@ class FiscalYearSequence(factory_trytond.TrytonFactory):
 
     company = context_company
     in_invoice_sequence = factory.SubFactory(
-        StrictSequence,
+        'trytond_factories.sequence.StrictSequence',
         name='Supplier Invoice',
         sequence_type=factory_trytond.ModelData(
             'account_invoice', 'sequence_type_account_invoice'),
     )
     out_invoice_sequence = factory.SubFactory(
-        StrictSequence,
+        'trytond_factories.sequence.StrictSequence',
         name='Customer Invoice',
         sequence_type=factory_trytond.ModelData(
             'account_invoice', 'sequence_type_account_invoice'),
     )
     in_credit_note_sequence = factory.SubFactory(
-        StrictSequence,
+        'trytond_factories.sequence.StrictSequence',
         name='Supplier credit note',
         sequence_type=factory_trytond.ModelData(
             'account_invoice', 'sequence_type_account_invoice'),
     )
     out_credit_note_sequence = factory.SubFactory(
-        StrictSequence,
+        'trytond_factories.sequence.StrictSequence',
         name='Customer credit note',
         sequence_type=factory_trytond.ModelData(
             'account_invoice', 'sequence_type_account_invoice'),
     )
     auto_invoice_sequence = factory.SubFactory(
-        StrictSequence,
+        'trytond_factories.sequence.StrictSequence',
         name='Auto Invoice',
         sequence_type=factory_trytond.ModelData(
             'account_invoice', 'sequence_type_account_invoice'),
@@ -110,7 +118,7 @@ class FiscalYear(factory_trytond.TrytonFactory):
     start_date = factory.LazyAttribute(lambda o: datetime.date(o.year, 1, 1))
     end_date = factory.LazyAttribute(lambda o: datetime.date(o.year, 12, 31))
     post_move_sequence = factory.SubFactory(
-        Sequence,
+        'trytond_factories.sequence.Sequence',
         sequence_type=factory_trytond.ModelData(
             'account', 'sequence_type_account_move'),
     )

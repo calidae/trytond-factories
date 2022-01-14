@@ -1,4 +1,10 @@
-# -*- coding: utf-8 -*-
+
+__all__ = [
+    'CurrencyRate',
+    'BaseCurrency',
+    'Euro',
+    'OtherCurrency',
+]
 
 import datetime
 from decimal import Decimal
