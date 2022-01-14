@@ -21,7 +21,7 @@ def get_require_version(name):
     )
 
 
-version = '6.0.1'
+version = '6.0.2'
 major_version, minor_version, _ = version.split('.', 2)
 major_version = int(major_version)
 minor_version = int(minor_version)
