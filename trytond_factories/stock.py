@@ -1,11 +1,20 @@
 
+__all__ = [
+    'StorageLocation',
+    'Warehouse',
+    'StockConfig',
+    'StockMove',
+    'FoundStock',
+    'ShipmentIn',
+    'PurchaseShipment',
+]
+
 import functools
 import operator
 
 import factory
 import factory_trytond
 
-from . import Product
 from . import context_warehouse
 
 
@@ -52,7 +61,7 @@ class StockMove(factory_trytond.TrytonFactory):
     class Meta:
         model = 'stock.move'
 
-    product = factory.SubFactory(Product)
+    product = factory.SubFactory('trytond_factories.product.Product')
     quantity = factory.Faker('pyfloat')
 
     @classmethod

@@ -1,11 +1,13 @@
 
+__all__ = [
+    'PurchaseLine',
+    'PurchaseSubtotal',
+    'Purchase',
+    'PartyPurchasePriceList',
+]
+
 import factory
 import factory_trytond
-
-
-from . import Party
-from . import Product
-from . import PriceList
 
 
 class _PurchaseLine(factory_trytond.TrytonFactory):
@@ -28,7 +30,7 @@ class PurchaseLine(_PurchaseLine):
         max_value=50,
         step=1,
     )
-    product = factory.SubFactory(Product)
+    product = factory.SubFactory('trytond_factories.product.Product')
 
     @classmethod
     def on_change(cls, obj):
@@ -43,7 +45,7 @@ class Purchase(factory_trytond.TrytonFactory):
     class Meta:
         model = 'purchase.purchase'
 
-    party = factory.SubFactory(Party)
+    party = factory.SubFactory('trytond_factories.party.Party')
     invoice_address = factory.LazyAttribute(
         lambda n: n.party.address_get('invoice')
     )
@@ -87,4 +89,5 @@ class PartyPurchasePriceList(factory_trytond.TrytonFactory):
         model = 'party.party.purchase_price_list'
 
     party = None
-    purchase_price_list = factory.SubFactory(PriceList)
+    purchase_price_list = factory.SubFactory(
+            'trytond_factories.product.PriceList')

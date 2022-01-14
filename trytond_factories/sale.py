@@ -1,10 +1,13 @@
 
+__all__ = [
+    'SaleConfig',
+    'SaleLine',
+    'SaleSubtotal',
+    'Sale',
+]
+
 import factory
 import factory_trytond
-
-from . import Party
-from . import Product
-from . import Sequence
 
 
 class SaleConfig(factory_trytond.TrytonFactory):
@@ -12,7 +15,7 @@ class SaleConfig(factory_trytond.TrytonFactory):
         model = 'sale.configuration'
 
     sale_sequence = factory.SubFactory(
-        Sequence,
+        'trytond_factories.sequence.Sequence',
         name='Sale',
         sequence_type=factory_trytond.ModelData(
             'sale', 'sequence_type_sale'),
@@ -40,7 +43,7 @@ class SaleLine(_SaleLine):
         max_value=50,
         step=1,
     )
-    product = factory.SubFactory(Product)
+    product = factory.SubFactory('trytond_factories.product.Product')
 
     @classmethod
     def on_change(cls, obj):
@@ -55,7 +58,7 @@ class Sale(factory_trytond.TrytonFactory):
     class Meta:
         model = 'sale.sale'
 
-    party = factory.SubFactory(Party)
+    party = factory.SubFactory('trytond_factories.party.Party')
     invoice_party = factory.SelfAttribute('party')
     invoice_address = factory.LazyAttribute(
         lambda n: n.party.address_get('invoice')

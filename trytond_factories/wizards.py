@@ -1,4 +1,8 @@
 
+__all__ = [
+    'create_chart',
+]
+
 from trytond.pool import Pool
 
 

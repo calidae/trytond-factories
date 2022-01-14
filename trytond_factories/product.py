@@ -1,12 +1,21 @@
 
+__all__ = [
+    'ProductCategory',
+    'ProductCategoryTree',
+    'ProductAccountCategory',
+    'ProductSupplier',
+    'Product',
+    'ProductTemplate',
+    'PriceListLine',
+    'PriceList',
+]
+
 import random
 
 import factory
 import factory_trytond
 
 from trytond.pool import Pool
-
-from . import Party
 
 
 class ProductCategory(factory_trytond.TrytonFactory):
@@ -60,7 +69,7 @@ class ProductSupplier(factory_trytond.TrytonFactory):
     class Meta:
         model = 'purchase.product_supplier'
 
-    party = factory.SubFactory(Party)
+    party = factory.SubFactory('trytond_factories.party.Party')
 
 
 class _ProductTemplate(factory_trytond.TrytonFactory):

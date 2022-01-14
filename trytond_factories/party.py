@@ -1,4 +1,22 @@
-# -*- coding: utf-8 -*-
+
+__all__ = [
+    'PartyConfig',
+    'SpanishVatcode',
+    'Country',
+    'PartyAddress',
+    'PartyIdentifier',
+    'PartyContact',
+    'PhoneContact',
+    'MobileContact',
+    'FaxContact',
+    'WebsiteContact',
+    'EmailContact',
+    'Party',
+    'PartyAccount',
+    'AccountInvoicePaymentTermLine',
+    'AccountInvoicePaymentTerm',
+    'ComParty',
+]
 
 import factory
 import factory_trytond
