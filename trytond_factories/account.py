@@ -99,12 +99,6 @@ class FiscalYearSequence(factory_trytond.TrytonFactory):
         sequence_type=factory_trytond.ModelData(
             'account_invoice', 'sequence_type_account_invoice'),
     )
-    auto_invoice_sequence = factory.SubFactory(
-        'trytond_factories.sequence.StrictSequence',
-        name='Auto Invoice',
-        sequence_type=factory_trytond.ModelData(
-            'account_invoice', 'sequence_type_account_invoice'),
-    )
 
 
 class FiscalYear(factory_trytond.TrytonFactory):
