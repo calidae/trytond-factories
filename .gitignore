@@ -6,5 +6,5 @@ dist
 .cache/
 .local/
 build/
-db_cache/
+db-cache/
 .bash_history
