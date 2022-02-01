@@ -21,7 +21,7 @@ tests_require = extras_require['tests']
 
 setup(
     name="trytond_factories",
-    version='6.0.2',
+    version='6.0.3',
     author="Calidae",
     author_email="dev@calidae.com",
     description="A collection of opinionated factories for common Tryton modules",
