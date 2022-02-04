@@ -5,4 +5,5 @@ import pytest
 def trytond_modules():
     yield [
         'account_invoice',
+        'tests',
     ]
