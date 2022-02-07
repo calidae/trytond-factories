@@ -11,11 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v1
-    - name: Install twine and wheel
+    - name: Install twine and build
       run: |
-        python3 -m pip install --upgrade pip twine wheel
+        python3 -m pip install --upgrade pip twine build
     - name: Prepare dist file
-      run: python3 setup.py bdist_wheel
+      run: python3 -m build --sdist --wheel
     - name: Publish dist on PyPI
       env:
         TWINE_USERNAME: __token__
