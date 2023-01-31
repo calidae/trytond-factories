@@ -64,16 +64,10 @@ class Sale(factory_trytond.TrytonFactory):
         lambda n: n.party.address_get('invoice')
     )
 
-    @factory.post_generation
-    def lines(obj, create, extracted, **kwargs):
-        obj.lines = (
-            extracted
-            or SaleLine.create_batch(
-                1,
-                sale=obj,
-                company=obj.company,
-                **kwargs,
-            )
+    lines = factory.RelatedFactoryList(
+        SaleLine,
+        factory_related_name="sale",
+        size=1,
         )
 
     @factory.post_generation

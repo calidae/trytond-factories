@@ -50,16 +50,10 @@ class Purchase(factory_trytond.TrytonFactory):
         lambda n: n.party.address_get('invoice')
     )
 
-    @factory.post_generation
-    def lines(obj, create, extracted, **kwargs):
-        obj.lines = (
-            extracted
-            or PurchaseLine.create_batch(
-                1,
-                purchase=obj,
-                company=obj.company,
-                **kwargs,
-            )
+    lines = factory.RelatedFactoryList(
+        PurchaseLine,
+        factory_related_name="purchase",
+        size=1,
         )
 
     @factory.post_generation
