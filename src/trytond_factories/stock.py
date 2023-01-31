@@ -52,9 +52,28 @@ class Warehouse(_StockLocation):
     )
 
 
+def _stock_sequence(name, stock_fs_id):
+    return factory.SubFactory(
+        "trytond_factories.sequence.Sequence",
+        name=name,
+        sequence_type=factory_trytond.ModelData("stock", stock_fs_id),
+    )
+
+
 class StockConfig(factory_trytond.TrytonFactory):
     class Meta:
         model = 'stock.configuration'
+
+    shipment_in_sequence = _stock_sequence(
+        "Shipment In", "sequence_type_shipment_in")
+    shipment_in_return_sequence = _stock_sequence(
+        "Shipment In Return", "sequence_type_shipment_in_return")
+    shipment_out_sequence = _stock_sequence(
+        "Shipment Out", "sequence_type_shipment_out")
+    shipment_out_return_sequence = _stock_sequence(
+        "Shipment Out Return", "sequence_type_shipment_out_return")
+    shipment_internal_sequence = _stock_sequence(
+        "Shipment Internal", "sequence_type_shipment_internal")
 
 
 class StockMove(factory_trytond.TrytonFactory):

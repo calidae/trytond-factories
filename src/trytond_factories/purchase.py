@@ -1,5 +1,6 @@
 
 __all__ = [
+    'PurchaseConfig',
     'PurchaseLine',
     'PurchaseSubtotal',
     'Purchase',
@@ -8,6 +9,18 @@ __all__ = [
 
 import factory
 import factory_trytond
+
+
+class PurchaseConfig(factory_trytond.TrytonFactory):
+    class Meta:
+        model = 'purchase.configuration'
+
+    purchase_sequence = factory.SubFactory(
+        'trytond_factories.sequence.Sequence',
+        name='Purchase',
+        sequence_type=factory_trytond.ModelData(
+            'purchase', 'sequence_type_purchase'),
+    )
 
 
 class _PurchaseLine(factory_trytond.TrytonFactory):
