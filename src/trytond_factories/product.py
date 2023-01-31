@@ -85,6 +85,10 @@ class _ProductTemplate(factory_trytond.TrytonFactory):
     list_price = factory.Faker(
         'pydecimal', min_value=100, max_value=1000, right_digits=2)
 
+    default_uom = factory_trytond.LazySearch("product.uom", lambda stub: [])
+    sale_uom = factory.SelfAttribute("default_uom")
+    purchase_uom = factory.SelfAttribute("default_uom")
+
     account_category = factory.SubFactory(ProductAccountCategory)
 
     product_suppliers = factory.RelatedFactoryList(
