@@ -41,7 +41,7 @@ class PurchaseSubtotal(_PurchaseLine):
     type = 'subtotal'
 
 
-class Purchase(factory_trytond.TrytonFactory):
+class PurchaseDraft(factory_trytond.TrytonFactory):
     class Meta:
         model = 'purchase.purchase'
 
@@ -54,28 +54,20 @@ class Purchase(factory_trytond.TrytonFactory):
         PurchaseLine,
         factory_related_name="purchase",
         size=1,
-        )
+    )
 
+
+class PurchaseQuotation(PurchaseDraft):
     @factory.post_generation
-    def state(obj, create, extracted, **kwargs):
-        "For example: Purchase.create(state='cancel')"
-        Model = obj.__class__
-        state_transitions = {
-            None: tuple(()),
-            'draft': tuple(()),
-            'quotation': (Model.quote,),
-            'confirmed': (Model.quote, Model.confirm),
-            'processing': (Model.quote, Model.confirm, Model.process),
-            'cancel': (Model.cancel),
-        }
-        return state_transitions[extracted]
+    def quote(obj, create, extracted, **kwargs):
+        assert create, 'The only supported strategy is "create"'
+        obj.quote([obj])
 
-    @classmethod
-    def _after_postgeneration(cls, obj, create, results=None):
-        super(Purchase, cls)._after_postgeneration(obj, create, results)
-        if create and results:
-            for button in results['state']:
-                button([obj])
+
+class Purchase(PurchaseQuotation):
+    @factory.post_generation
+    def confirm(obj, create, extracted, **kwargs):
+        obj.confirm([obj])
 
 
 class PartyPurchasePriceList(factory_trytond.TrytonFactory):
