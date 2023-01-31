@@ -14,7 +14,6 @@ class _Attachment(factory_trytond.TrytonFactory):
 
     name = factory.Faker('word')
     description = factory.Faker('sentence')
-    resource = factory.SubFactory('trytond_factories.test.TestModel')
 
 
 class DataAttachment(_Attachment):

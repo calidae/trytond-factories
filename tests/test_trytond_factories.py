@@ -1,4 +1,13 @@
+import factory
+import factory_trytond
 import trytond_factories
+
+
+class _TestModelFactory(factory_trytond.TrytonFactory):
+    class Meta:
+        model = 'test.model'
+
+    name = factory.Faker('word')
 
 
 def test_company(transaction):
@@ -25,13 +34,26 @@ def test_report(transaction):
     assert report
 
 
-def test_attachment_data(transaction):
+def test_attachment_data(pool):
     """Test DataAttachment factory"""
-    data = trytond_factories.DataAttachment.create()
-    assert data
+    Attachment = pool.get('ir.attachment')
+
+    class ResourceFactory(_TestModelFactory):
+        attachment = factory.RelatedFactory(
+            trytond_factories.DataAttachment,
+            factory_related_name="resource"
+        )
+
+    resource = ResourceFactory.create()
+
+    (attachment,) = Attachment.search([])
+    assert attachment.resource == resource
 
 
 def test_attachment_link(transaction):
     """Test LinkAttachment factory"""
-    link = trytond_factories.LinkAttachment.create()
-    assert link
+
+    class LinkFactory(trytond_factories.LinkAttachment):
+        resource = factory.SubFactory(_TestModelFactory)
+
+    assert LinkFactory.create().resource
