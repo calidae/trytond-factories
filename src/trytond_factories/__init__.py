@@ -1,4 +1,4 @@
-__version__ = '6.6.0'
+__version__ = '6.6.2'
 
 from .tools import *  # NOQA: 401
 from .account import *  # NOQA: 401
@@ -10,6 +10,7 @@ from .invoice import *  # NOQA: 401
 from .party import *  # NOQA: 401
 from .product import *  # NOQA: 401
 from .purchase import *  # NOQA: 401
+from .sale_amendment import *  # NOQA: 401
 from .sale import *  # NOQA: 401
 from .sequence import *  # NOQA: 401
 from .stock import *  # NOQA: 401
