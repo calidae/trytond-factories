@@ -25,9 +25,7 @@ class SaleAmendment(factory_trytond.TrytonFactory):
         state_transitions = {
             None: tuple(()),
             "draft": tuple(()),
-            "requested": (Model.request,),
             "validated": (
-                Model.request,
                 Model.validate_amendment,
             ),
         }
