@@ -44,7 +44,6 @@ class _Invoice(factory_trytond.TrytonFactory):
     def on_change(cls, obj):
         obj.on_change_type()
         obj.on_change_party()
-        obj.account = obj.on_change_with_account()
 
 
 class SupplierInvoice(_Invoice):
