@@ -14,7 +14,7 @@ class Action(factory_trytond.TrytonFactory):
         model = 'ir.action'
 
     name = factory.Faker('word')
-    type = factory.Faker('word', ext_word_list=['tree', 'form'])
+    type = factory.Faker('word', ext_word_list=['tree'])
     records = 'selected'
     usage = factory.Faker('word')
     keywords = factory.RelatedFactoryList(
