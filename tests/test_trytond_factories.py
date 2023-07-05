@@ -1,6 +1,7 @@
 import factory
 import factory_trytond
 import pytest
+import pytest_trytond.tools
 
 import trytond_factories
 
@@ -71,3 +72,27 @@ def test_attachment_link(transaction):
         resource = factory.SubFactory(_TestModelFactory)
 
     assert LinkFactory.create().resource
+
+
+def test_sale(sale_config):
+    """Test sale configuration and factory"""
+    with pytest_trytond.tools.lazy_queue():
+        sale = trytond_factories.Sale.create()
+
+    (sale,) = sale.browse([sale])
+    assert sale.state == "processing"
+
+
+def test_purchase(purchase_config):
+    """Test purchase configuration and factory and invoice"""
+    with pytest_trytond.tools.lazy_queue():
+        purchase = trytond_factories.Purchase.create()
+
+    (purchase,) = purchase.browse([purchase])
+    assert purchase.state == "processing"
+
+    with pytest_trytond.tools.lazy_queue():
+        trytond_factories.PurchaseInvoice.create(
+            purchase=purchase,
+            state="paid",
+        )

@@ -17,3 +17,7 @@ company = trytond_factories.Company.create(party__name='Example Company')
 print(company)
 >>> Pool().get('company.company')(1)
 ```
+
+## Versioning Scheme
+
+This library is versioned following the Tryton series to which it aims compatibility.

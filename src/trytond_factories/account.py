@@ -74,7 +74,6 @@ class FiscalYearSequence(factory_trytond.TrytonFactory):
     class Meta:
         model = 'account.fiscalyear.invoice_sequence'
 
-    company = context_company
     in_invoice_sequence = factory.SubFactory(
         'trytond_factories.sequence.StrictSequence',
         name='Supplier Invoice',

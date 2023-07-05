@@ -59,9 +59,11 @@ class PurchaseDraft(factory_trytond.TrytonFactory):
         model = 'purchase.purchase'
 
     party = factory.SubFactory('trytond_factories.party.Party')
-    invoice_address = factory.LazyAttribute(
-        lambda n: n.party.address_get('invoice')
-    )
+    invoice_party = factory.SelfAttribute("party")
+
+    @factory.lazy_attribute
+    def invoice_address(stub):
+        return stub.invoice_party.address_get("invoice")
 
     lines = factory.RelatedFactoryList(
         PurchaseLine,

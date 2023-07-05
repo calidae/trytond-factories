@@ -5,6 +5,8 @@ __all__ = [
 ]
 
 import datetime
+import functools
+import operator
 
 import factory
 import factory_trytond
@@ -16,9 +18,8 @@ class _Invoice(factory_trytond.TrytonFactory):
     class Meta:
         model = 'account.invoice'
 
-    invoice_address = factory.LazyAttribute(
-        lambda n: n.party.addresses[0]
-    )
+    company = context_company
+    party = factory.SubFactory("trytond_factories.party.Party")
 
     @factory.post_generation
     def state(obj, create, extracted, **kwargs):
@@ -55,10 +56,16 @@ class PurchaseInvoice(SupplierInvoice):
     class Params:
         purchase = None
 
-    company = context_company
-    party = factory.SelfAttribute('purchase.party')
-    lines = factory.SelfAttribute('purchase.invoice_lines')
+    company = factory.SelfAttribute('purchase.company')
+    party = factory.SelfAttribute('purchase.invoice_party')
     invoice_date = factory.LazyFunction(datetime.date.today)
+
+    @factory.lazy_attribute
+    def lines(stub):
+        functools.reduce(
+            operator.concat,
+            (purchase_l.invoice_lines for purchase_l in stub.purchase.lines)
+        )
 
     @classmethod
     def on_change(cls, obj):

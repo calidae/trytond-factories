@@ -60,9 +60,15 @@ class SaleDraft(factory_trytond.TrytonFactory):
 
     party = factory.SubFactory('trytond_factories.party.Party')
     invoice_party = factory.SelfAttribute('party')
-    invoice_address = factory.LazyAttribute(
-        lambda n: n.party.address_get('invoice')
-    )
+    shipment_party = factory.SelfAttribute("party")
+
+    @factory.lazy_attribute
+    def invoice_address(stub):
+        return stub.invoice_party.address_get("invoice")
+
+    @factory.lazy_attribute
+    def shipment_address(stub):
+        return stub.shipment_party.address_get("delivery")
 
     lines = factory.RelatedFactoryList(
         SaleLine,
