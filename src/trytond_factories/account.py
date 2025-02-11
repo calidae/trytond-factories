@@ -19,32 +19,23 @@ from . import context_company
 
 class AccountChartTemplates():
 
-    class MinimalCA(factory.StubFactory):
-
-        root = factory_trytond.ModelData('account', 'account_template_root_ca')  # noqa: E501
-        receivable = factory_trytond.ModelData('account', 'account_template_receivable_ca')  # noqa: E501
-        payable = factory_trytond.ModelData('account', 'account_template_payable_ca')  # noqa: E501
-        revenue = factory_trytond.ModelData('account', 'account_template_revenue_ca')  # noqa: E501
-        expense = factory_trytond.ModelData('account', 'account_template_expense_ca')  # noqa: E501
-        tax = factory_trytond.ModelData('account', 'account_template_tax_ca')  # noqa: E501
-
     class MinimalEN(factory.StubFactory):
 
         root = factory_trytond.ModelData('account', 'account_template_root_en')  # noqa: E501
-        receivable = factory_trytond.ModelData('account', 'account_template_receivable_en')  # noqa: E501
-        payable = factory_trytond.ModelData('account', 'account_template_payable_en')  # noqa: E501
-        revenue = factory_trytond.ModelData('account', 'account_template_revenue_en')  # noqa: E501
-        expense = factory_trytond.ModelData('account', 'account_template_expense_en')  # noqa: E501
-        tax = factory_trytond.ModelData('account', 'account_template_tax_en')  # noqa: E501
+        receivable = factory_trytond.ModelData('account', 'account_template_1_2_1_en')  # noqa: E501
+        payable = factory_trytond.ModelData('account', 'account_template_2_1_4_en')  # noqa: E501
+        revenue = factory_trytond.ModelData('account', 'account_template_4_1_1_en')  # noqa: E501
+        expense = factory_trytond.ModelData('account', 'account_template_2_2_1_en')  # noqa: E501
+        tax = factory_trytond.ModelData('account', 'account_template_6_3_11_en')  # noqa: E501
 
     class MinimalES(factory.StubFactory):
 
         root = factory_trytond.ModelData('account', 'account_template_root_es')  # noqa: E501
-        receivable = factory_trytond.ModelData('account', 'account_template_receivable_es')  # noqa: E501
-        payable = factory_trytond.ModelData('account', 'account_template_payable_es')  # noqa: E501
-        revenue = factory_trytond.ModelData('account', 'account_template_revenue_es')  # noqa: E501
-        expense = factory_trytond.ModelData('account', 'account_template_expense_es')  # noqa: E501
-        tax = factory_trytond.ModelData('account', 'account_template_tax_es')  # noqa: E501
+        receivable = factory_trytond.ModelData('account', 'account_template_1_2_1_es')  # noqa: E501
+        payable = factory_trytond.ModelData('account', 'account_template_2_1_4_es')  # noqa: E501
+        revenue = factory_trytond.ModelData('account', 'account_template_4_1_1_es')  # noqa: E501
+        expense = factory_trytond.ModelData('account', 'account_template_2_2_1_es')  # noqa: E501
+        tax = factory_trytond.ModelData('account', 'account_template_6_3_11_es')  # noqa: E501
 
     class PGCNormal(factory.StubFactory):
 
