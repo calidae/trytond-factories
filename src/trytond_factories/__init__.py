@@ -1,4 +1,4 @@
-__version__ = "7.4.0"
+__version__ = "7.4.2"
 
 from .tools import *  # NOQA: 401
 from .account import *  # NOQA: 401
